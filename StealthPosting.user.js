@@ -118,7 +118,7 @@ function addIINEButtonComments() {
   var commentElms = document.querySelectorAll( '[id^="issuecomment-"]' );
 
   for (var i = 0; i < commentElms.length; i++) {
-    var commentHeaderElm = commentElms[i].querySelector('.comment-header-date');
+    var commentHeaderElm = commentElms[i].querySelector('.comment-header-right');
     var element = document.createElement('span');
 
     element.dataset.issueCommentId = commentElms[i].id;
@@ -127,7 +127,7 @@ function addIINEButtonComments() {
     element.addEventListener('click', postNice, false);
 
     element.appendChild(IINEImg);
-    commentHeaderElm.insertBefore(element);
+    commentHeaderElm.appendChild(element);
   }
 }
 
