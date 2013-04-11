@@ -127,7 +127,7 @@ function addIINEButtonComments() {
     element.addEventListener('click', postNice, false);
 
     element.appendChild(IINEImg);
-    commentHeaderElm.appendChild(element);
+    commentHeaderElm.insertBefore(element);
   }
 }
 
