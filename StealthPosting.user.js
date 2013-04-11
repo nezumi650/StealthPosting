@@ -23,7 +23,7 @@ var buttonSettingHeight = 25;
 
 // ボタン画像の背景色
 // @TODO もっとかっこよくエフェクトさせる
-var buttonSettingColor            = 'white';
+var buttonSettingColor        = 'white';
 var buttonSettingColorClicked = 'yellow';
 
 
