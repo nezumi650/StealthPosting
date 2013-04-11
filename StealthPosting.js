@@ -15,7 +15,7 @@ var customComment = 'IINE :+1:';
 var repoURL = 'https://github.com/nezumi650/StealthPosting';
 
 // ボタン画像(背景透過)
-var buttonSettingImgPath = '/images/icons/emoji/+1.png';
+var buttonSettingImgPath = 'https://github.com/nezumi650/StealthPosting/blob/master/iine.png';
 
 // ボタン画像の縦横
 var buttonSettingWidth  = 50;
