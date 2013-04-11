@@ -118,8 +118,8 @@ function addIINEButtonComments() {
   var commentElms = document.querySelectorAll( '[id^="issuecomment-"]' );
 
   for (var i = 0; i < commentElms.length; i++) {
-    var commentHeaderElm = commentElms[i].querySelector('.comment-header-right ul');
-    var element = document.createElement('li');
+    var commentHeaderElm = commentElms[i].querySelector('.comment-header-date');
+    var element = document.createElement('span');
 
     element.dataset.issueCommentId = commentElms[i].id;
 
