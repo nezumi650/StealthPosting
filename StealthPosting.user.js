@@ -202,7 +202,6 @@ function hideAllIINEComments(discussionBubblesAllArray) {
   */
 function deleteIINEComment() {
   var commentId = this.getAttribute('for');
-//  console.log(commentId);
 }
 
 
