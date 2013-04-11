@@ -260,14 +260,14 @@ function addIINEIcon(discussionBubblesAllArray) {
 // コメントを引数で受け取ってポスト
 
 function postComment(target) {
-    // フォームにコメントを挿入
-    var commentForm = document.querySelector( '[id^="comment_body_"]' );
-    commentForm.value = '<p class="IINEComment"> ' + target + ' ' + customComment + ' ' + '<br />' + defaultMessage + repoURL + '</p>';
+  // フォームにコメントを挿入
+  var commentForm = document.querySelector( '[id^="comment_body_"]' );
+  commentForm.value = '<p class="IINEComment"> ' + target + ' ' + customComment + ' ' + '<br />' + defaultMessage + repoURL + '</p>';
 
-	var submitButton = document.querySelector('.form-actions:last-child button[type="submit"]:last-child');
-    var mouseEvents = document.createEvent("MouseEvents");
-    mouseEvents.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-    submitButton.dispatchEvent( mouseEvents );
+  var submitButton = document.querySelector('.form-actions:last-child button[type="submit"]:last-child');
+  var mouseEvents = document.createEvent("MouseEvents");
+  mouseEvents.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+  submitButton.dispatchEvent( mouseEvents );
 
   // ちょっと待たないと書き込み終わってなくてhideできないので苦肉の対応
   // @TODO もうちょっとかっこ良くしたい。。。。
@@ -275,7 +275,7 @@ function postComment(target) {
     var allIINEComments = getAllIINEComments();
     addIINEIcon(allIINEComments);
     hideAllIINEComments(allIINEComments);
-    }, 800);
+  }, 800);
 }
 
 
