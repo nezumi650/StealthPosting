@@ -1,6 +1,5 @@
 /********************************************
   *** 各種ボタン設定
-  *** @TODO ボタン複数個持てる様にしたいなー。。。
   ********************************************/
 
 /**
@@ -105,10 +104,10 @@ function addIINEButtonIssue() {
 function postNiceIssue(){
   // いいねボタンを一瞬黄色にする
   var buttonImgElm = this;
-  changeYellow(buttonImgElm);
+  changeColor(buttonImgElm, buttonSettingColorClicked);
   postComment('This issue');
   // いいねボタンを白色に戻す
-  setTimeout( function(){changeDefault(buttonImgElm)}, 300);
+  setTimeout( function(){changeColor(buttonImgElm, buttonSettingColor)}, 300);
 };
 
 /**
@@ -138,20 +137,17 @@ function postNice(){
   var issueCommentId = this.dataset.issueCommentId;
   // いいねボタンを一瞬黄色にする
   var buttonImgElm = this.querySelector('img');
-  changeYellow(buttonImgElm);
+  changeColor(buttonImgElm, buttonSettingColorClicked);
   postComment(issueCommentId);
   // いいねボタンを白色に戻す
-  setTimeout( function(){changeDefault(buttonImgElm)}, 300);
+  setTimeout( function(){changeColor(buttonImgElm, buttonSettingColor)}, 300);
 };
 
 /**
   * いいねボタンの色の変更
   */
-function changeYellow(imgElm) {
-  imgElm.style.backgroundColor = 'yellow';
-}
-function changeDefault(imgElm) {
-  imgElm.style.backgroundColor = 'white';
+function changeColor(imgElm, color) {
+  imgElm.style.backgroundColor = color;
 }
 
 /**
@@ -159,7 +155,7 @@ function changeDefault(imgElm) {
   */
 function getAllIINEComments() {
   var discussionBubbles = document.querySelectorAll('.discussion-bubble');
-  var IINEComments = {}; //空のオブジェクト
+  var IINEComments = {};
   for (var i = 0; i < discussionBubbles.length; i++) {
     var discussionBubble = discussionBubbles[i];
 
@@ -176,7 +172,7 @@ function getAllIINEComments() {
         var originalCommentId = 'issue';
       }
       if (!IINEComments[originalCommentId]) {
-        IINEComments[originalCommentId] = []; //空の配列
+        IINEComments[originalCommentId] = [];
       }
       IINEComments[originalCommentId].push(discussionBubble);
     }
