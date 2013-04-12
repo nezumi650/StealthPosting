@@ -87,7 +87,7 @@ function addIINEButtonIssue() {
 
   // ボタンを配置する場所を用意
   var element = document.createElement('p');
-  element.style.textAlign='right';
+  element.style.textAlign = 'right';
   // 配置
   element.appendChild(IINEImg);
 
@@ -187,7 +187,7 @@ function hideAllIINEComments(discussionBubblesAllArray) {
   for (var parentId in discussionBubblesAllArray){
     var discussionBubblesArray = discussionBubblesAllArray[parentId];
     for (var i = 0; i < discussionBubblesArray.length; i++) {
-      discussionBubblesArray[i].style.display='none';
+      discussionBubblesArray[i].style.display = 'none';
     }
   }
 }
@@ -221,9 +221,9 @@ function addIINEIcon(discussionBubblesAllArray) {
     } else {
       // まだ無ければ作成
       avatarArea = document.createElement('p');
-      avatarArea.style.textAlign='right';
-      avatarArea.className='avatarArea';
-      avatarArea.innerHTML=avatarSettingDefaultInnerHTML;
+      avatarArea.style.textAlign = 'right';
+      avatarArea.className = 'avatarArea';
+      avatarArea.innerHTML = avatarSettingDefaultInnerHTML;
       // HTMLに入れ込む
       parentElm.appendChild(avatarArea);
     }
