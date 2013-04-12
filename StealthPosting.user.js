@@ -207,7 +207,7 @@ function deleteIINEComment() {
 function addIINEIcon(discussionBubblesAllArray) {
 
   for (var parentId in discussionBubblesAllArray){
-    if (parentId == 'issue') {
+    if (parentId === 'issue') {
       //@TODO
     } else {
       var parentElm = document.getElementById(parentId);
