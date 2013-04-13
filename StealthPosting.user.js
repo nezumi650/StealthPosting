@@ -235,15 +235,15 @@ function addLikeIcon(discussionBubblesAllArray) {
       var commentId = discussionBubblesArray[i].querySelector('[id^="issuecomment-"]').getAttribute('id');
       var avatarImgElm = discussionBubblesArray[i].querySelector('.discussion-bubble-avatar');
       // 小さいアバター画像を作成
-      var addAvatarImg      = document.createElement('img');
-      addAvatarImg.width  = avatarSettingImgWidth;
-      addAvatarImg.height = avatarSettingImgHeight;
-//      addAvatarImg.onclick = deleteLikeComment; @TODO アイコンクリックでイイネコメント削除
-      addAvatarImg.src      = avatarImgElm.getAttribute('src');
-      addAvatarImg.setAttribute('for', commentId);
+      var avatarImg      = document.createElement('img');
+      avatarImg.width  = avatarSettingImgWidth;
+      avatarImg.height = avatarSettingImgHeight;
+//      avatarImg.onclick = deleteLikeComment; @TODO アイコンクリックでイイネコメント削除
+      avatarImg.src      = avatarImgElm.getAttribute('src');
+      avatarImg.setAttribute('for', commentId);
 
       // 小さいアバター画像をHTMLに入れ込む
-      avatarArea.appendChild(addAvatarImg);
+      avatarArea.appendChild(avatarImg);
     }
   }
 }
