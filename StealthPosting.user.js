@@ -231,9 +231,10 @@ function addLikeIcon(discussionBubblesAllArray) {
     }
 
     var discussionBubblesArray = discussionBubblesAllArray[parentId];
-    for (var i = 0; i < discussionBubblesArray.length; i++) {
-      var commentId = discussionBubblesArray[i].querySelector('[id^="issuecomment-"]').getAttribute('id');
-      var avatarImgElm = discussionBubblesArray[i].querySelector('.discussion-bubble-avatar');
+    console.log(discussionBubblesArray);
+    for (var commentCnt = 0; commentCnt < discussionBubblesArray.length; commentCnt++) {
+      var commentId = discussionBubblesArray[commentCnt].querySelector('[id^="issuecomment-"]').getAttribute('id');
+      var avatarImgElm = discussionBubblesArray[commentCnt].querySelector('.discussion-bubble-avatar');
       // 小さいアバター画像を作成
       var avatarImg      = document.createElement('img');
       avatarImg.width  = avatarSettingImgWidth;
