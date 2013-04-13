@@ -10,22 +10,22 @@
 var defaultMessage = 'To display this comment more stylishly, see: ';
 
 // カスタムコメント
-var customComment = 'IINE :+1:';
+var customComment = 'Like :+1:';
 
 // リポジトリURL
 var repoURL = 'https://github.com/nezumi650/StealthPosting';
 
 // ボタン画像(背景透過)
-var buttonSettingImgPath = 'https://github.com/nezumi650/StealthPosting/blob/master/iine.png';
+var imgPath = 'https://github.com/nezumi650/StealthPosting/blob/master/Like.png';
 
 // ボタン画像の縦横
-var buttonSettingWidth  = 50;
-var buttonSettingHeight = 25;
+var imgWidth  = 50;
+var imgHeight = 25;
 
 // ボタン画像の背景色
 // @TODO もっとかっこよくエフェクトさせる
-var buttonSettingColor        = 'white';
-var buttonSettingColorClicked = 'yellow';
+var bkColor        = 'white';
+var bkColorClicked = 'yellow';
 
 
 /********************************************
@@ -33,11 +33,11 @@ var buttonSettingColorClicked = 'yellow';
   ********************************************/
 
 // ミニアバター画像の縦横
-var avatarSettingWidth  = 25;
-var avatarSettingHeight = 25;
+var avatarSettingImgWidth  = 25;
+var avatarSettingImgHeight = 25;
 
 // ミニアバター画像表示部の文言
-var avatarSettingDefaultInnerHTML = '<span style="font-size: 1px; color: #cccccc;">Got IINE from :</span> '
+var avatarSettingLabel = '<span style="font-size: 1px; color: #cccccc;">Got Like from :</span> '
 
 
 
@@ -45,15 +45,15 @@ var avatarSettingDefaultInnerHTML = '<span style="font-size: 1px; color: #cccccc
   *** 実処理
   ********************************************/
 // イシュー自体にイイネボタン追加
-// addIINEButtonIssue(); @TODO あとで
+// addLikeButtonIssue(); @TODO あとで
 
 // コメントにイイネボタン追加
-addIINEButtonComments();
+addLikeButtonComments();
 
 // ミニアバターの追加、イイネコメントのhide
-var allIINEComments = getAllIINEComments();
-addIINEIcon(allIINEComments);
-hideAllIINEComments(allIINEComments);
+var allLikeComments = getAllLikeComments();
+addLikeIcon(allLikeComments);
+hideAllLikeComments(allLikeComments);
 
 
 
@@ -66,32 +66,32 @@ hideAllIINEComments(allIINEComments);
 /**
   * いいねボタン自体を作成
   */
-function createIINEButton() {
+function createLikeButton() {
   // ボタンを用意
-  var IINEImg      = document.createElement('img');
-  IINEImg.width  = buttonSettingWidth;
-  IINEImg.height = buttonSettingHeight;
-  IINEImg.style.backgroundColor = buttonSettingColor;
-  IINEImg.src      = buttonSettingImgPath;
+  var LikeImg      = document.createElement('img');
+  LikeImg.width  = imgWidth;
+  LikeImg.height = imgHeight;
+  LikeImg.style.backgroundColor = bkColor;
+  LikeImg.src      = imgPath;
 
-  return IINEImg;
+  return LikeImg;
 }
 
 /**
   * issue 自体にいいねボタン追加
   * @TODO これまだ使ってない
   */
-function addIINEButtonIssue() {
+function addLikeButtonIssue() {
   // ボタンを用意
-  var IINEImg = createIINEButton();
+  var LikeImg = createLikeButton();
   // クリックされた時のイベントを用意
-  IINEImg.addEventListener('click', postNiceIssue, false);
+  LikeImg.addEventListener('click', postNiceIssue, false);
 
   // ボタンを配置する場所を用意
   var element = document.createElement('p');
   element.style.textAlign = 'right';
   // 配置
-  element.appendChild(IINEImg);
+  element.appendChild(LikeImg);
 
   // HTMLに入れ込む
   var issueElm = document.querySelector( '[id^="issue-"]' );
@@ -106,16 +106,16 @@ function addIINEButtonIssue() {
 function postNiceIssue(){
   // いいねボタンを一瞬黄色にする
   var buttonImgElm = this;
-  changeColor(buttonImgElm, buttonSettingColorClicked);
+  changeColor(buttonImgElm, bkColorClicked);
   postComment('This issue');
   // いいねボタンを白色に戻す
-  setTimeout( function(){changeColor(buttonImgElm, buttonSettingColor)}, 300);
+  setTimeout( function(){changeColor(buttonImgElm, bkColor)}, 300);
 };
 
 /**
   * コメントにいいねボタン追加
   */
-function addIINEButtonComments() {
+function addLikeButtonComments() {
   var commentElms = document.querySelectorAll( '[id^="issuecomment-"]' );
 
   for (var i = 0; i < commentElms.length; i++) {
@@ -124,10 +124,10 @@ function addIINEButtonComments() {
 
     element.dataset.issueCommentId = commentElms[i].id;
 
-    var IINEImg = createIINEButton();
+    var LikeImg = createLikeButton();
     element.addEventListener('click', postNice, false);
 
-    element.appendChild(IINEImg);
+    element.appendChild(LikeImg);
     commentHeaderElm.appendChild(element);
   }
 }
@@ -139,10 +139,10 @@ function postNice(){
   var issueCommentId = this.dataset.issueCommentId;
   // いいねボタンを一瞬黄色にする
   var buttonImgElm = this.querySelector('img');
-  changeColor(buttonImgElm, buttonSettingColorClicked);
+  changeColor(buttonImgElm, bkColorClicked);
   postComment(issueCommentId);
   // いいねボタンを白色に戻す
-  setTimeout( function(){changeColor(buttonImgElm, buttonSettingColor)}, 300);
+  setTimeout( function(){changeColor(buttonImgElm, bkColor)}, 300);
 };
 
 /**
@@ -155,9 +155,9 @@ function changeColor(imgElm, color) {
 /**
   * いいねコメントの一覧を、いいね元のコメントid毎に取得
   */
-function getAllIINEComments() {
+function getAllLikeComments() {
   var discussionBubbles = document.querySelectorAll('.discussion-bubble');
-  var IINEComments = {};
+  var LikeComments = {};
   for (var i = 0; i < discussionBubbles.length; i++) {
     var discussionBubble = discussionBubbles[i];
 
@@ -173,19 +173,19 @@ function getAllIINEComments() {
       } else {
         var originalCommentId = 'issue';
       }
-      if (!IINEComments[originalCommentId]) {
-        IINEComments[originalCommentId] = [];
+      if (!LikeComments[originalCommentId]) {
+        LikeComments[originalCommentId] = [];
       }
-      IINEComments[originalCommentId].push(discussionBubble);
+      LikeComments[originalCommentId].push(discussionBubble);
     }
   }
-  return IINEComments;
+  return LikeComments;
 }
 
 /**
   * いいねコメントを非表示にする
   */
-function hideAllIINEComments(discussionBubblesAllArray) {
+function hideAllLikeComments(discussionBubblesAllArray) {
   for (var parentId in discussionBubblesAllArray){
     var discussionBubblesArray = discussionBubblesAllArray[parentId];
     for (var i = 0; i < discussionBubblesArray.length; i++) {
@@ -198,7 +198,7 @@ function hideAllIINEComments(discussionBubblesAllArray) {
   * いいねコメントを削除する
   * @TODO 実装
   */
-function deleteIINEComment() {
+function deleteLikeComment() {
   var commentId = this.getAttribute('for');
 }
 
@@ -206,7 +206,7 @@ function deleteIINEComment() {
 /**
   * いいねした人のアイコンを小さく表示する
   */
-function addIINEIcon(discussionBubblesAllArray) {
+function addLikeIcon(discussionBubblesAllArray) {
 
   for (var parentId in discussionBubblesAllArray){
     if (parentId === 'issue') {
@@ -219,13 +219,13 @@ function addIINEIcon(discussionBubblesAllArray) {
     var avatarArea = parentElm.querySelector('.avatarArea');
     if (avatarArea) {
       // すでにあれば、一回中身を削除
-      avatarArea.innerHTML = avatarSettingDefaultInnerHTML;
+      avatarArea.innerHTML = avatarSettingLabel;
     } else {
       // まだ無ければ作成
       avatarArea = document.createElement('p');
       avatarArea.style.textAlign = 'right';
       avatarArea.className = 'avatarArea';
-      avatarArea.innerHTML = avatarSettingDefaultInnerHTML;
+      avatarArea.innerHTML = avatarSettingLabel;
       // HTMLに入れ込む
       parentElm.appendChild(avatarArea);
     }
@@ -236,9 +236,9 @@ function addIINEIcon(discussionBubblesAllArray) {
       var avatarImgElm = discussionBubblesArray[i].querySelector('.discussion-bubble-avatar');
       // 小さいアバター画像を作成
       var addAvatarImg      = document.createElement('img');
-      addAvatarImg.width  = avatarSettingWidth;
-      addAvatarImg.height = avatarSettingHeight;
-//      addAvatarImg.onclick = deleteIINEComment; @TODO アイコンクリックでイイネコメント削除
+      addAvatarImg.width  = avatarSettingImgWidth;
+      addAvatarImg.height = avatarSettingImgHeight;
+//      addAvatarImg.onclick = deleteLikeComment; @TODO アイコンクリックでイイネコメント削除
       addAvatarImg.src      = avatarImgElm.getAttribute('src');
       addAvatarImg.setAttribute('for', commentId);
 
@@ -259,7 +259,7 @@ function addIINEIcon(discussionBubblesAllArray) {
 function postComment(target) {
   // フォームにコメントを挿入
   var commentForm = document.querySelector( '[id^="comment_body_"]' );
-  commentForm.value = '<p class="IINEComment"> ' + target + ' ' + customComment + ' ' + '<br />' + defaultMessage + repoURL + '</p>';
+  commentForm.value = '<p class="LikeComment"> ' + target + ' ' + customComment + ' ' + '<br />' + defaultMessage + repoURL + '</p>';
 
   var submitButton = document.querySelector('.form-actions:last-child button[type="submit"]:last-child');
   var mouseEvents = document.createEvent("MouseEvents");
@@ -269,9 +269,9 @@ function postComment(target) {
   // ちょっと待たないと書き込み終わってなくてhideできないので苦肉の対応
   // @TODO もうちょっとかっこ良くしたい。。。。
   setTimeout( function(){
-    var allIINEComments = getAllIINEComments();
-    addIINEIcon(allIINEComments);
-    hideAllIINEComments(allIINEComments);
+    var allLikeComments = getAllLikeComments();
+    addLikeIcon(allLikeComments);
+    hideAllLikeComments(allLikeComments);
   }, 800);
 }
 
