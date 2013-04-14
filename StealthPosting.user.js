@@ -10,20 +10,19 @@
 var defaultMessage = 'To display this comment more stylishly, see: ';
 
 // カスタムコメント
-var customComment = 'Like :+1:';
+var customComment = 'Stealth :+1:';
 
 // リポジトリURL
 var repoURL = 'https://github.com/nezumi650/StealthPosting';
 
 // ボタン画像(背景透過)
-var imgPath = 'https://github.com/nezumi650/StealthPosting/blob/master/Like.png';
+var imgPath = 'https://github.com/nezumi650/StealthPosting/blob/master/iine.png';
 
 // ボタン画像の縦横
 var imgWidth  = 50;
 var imgHeight = 25;
 
 // ボタン画像の背景色
-// @TODO もっとかっこよくエフェクトさせる
 var bkColor        = 'white';
 var bkColorClicked = 'yellow';
 
@@ -37,7 +36,7 @@ var avatarSettingImgWidth  = 25;
 var avatarSettingImgHeight = 25;
 
 // ミニアバター画像表示部の文言
-var avatarSettingLabel = '<span style="font-size: 1px; color: #cccccc;">Got Like from :</span> '
+var avatarSettingLabel = '<span style="font-size: 1px; color: #cccccc;">Got ' + customComment + ' from :</span> '
 
 
 
@@ -45,15 +44,15 @@ var avatarSettingLabel = '<span style="font-size: 1px; color: #cccccc;">Got Like
   *** 実処理
   ********************************************/
 // イシュー自体にイイネボタン追加
-// addLikeButtonIssue(); @TODO あとで
+// addStealthButtonIssue(); @TODO あとで
 
 // コメントにイイネボタン追加
-addLikeButtonComments();
+addStealthButtonComments();
 
 // ミニアバターの追加、イイネコメントのhide
-var allLikeComments = getAllLikeComments();
-addLikeIcon(allLikeComments);
-hideAllLikeComments(allLikeComments);
+var allStealthComments = getAllStealthComments();
+addStealthIcon(allStealthComments);
+hideAllStealthComments(allStealthComments);
 
 
 
@@ -64,34 +63,34 @@ hideAllLikeComments(allLikeComments);
   ********************************************/
 
 /**
-  * いいねボタン自体を作成
+  * ステルスポストボタン自体を作成
   */
-function createLikeButton() {
+function createStealthButton() {
   // ボタンを用意
-  var LikeImg      = document.createElement('img');
-  LikeImg.width  = imgWidth;
-  LikeImg.height = imgHeight;
-  LikeImg.style.backgroundColor = bkColor;
-  LikeImg.src      = imgPath;
+  var StealthImg    = document.createElement('img');
+  StealthImg.width  = imgWidth;
+  StealthImg.height = imgHeight;
+  StealthImg.style.backgroundColor = bkColor;
+  StealthImg.src    = imgPath;
 
-  return LikeImg;
+  return StealthImg;
 }
 
 /**
-  * issue 自体にいいねボタン追加
+  * issue 自体にステルスポストボタン追加
   * @TODO これまだ使ってない
   */
-function addLikeButtonIssue() {
+function addStealthButtonIssue() {
   // ボタンを用意
-  var LikeImg = createLikeButton();
+  var StealthImg = createStealthButton();
   // クリックされた時のイベントを用意
-  LikeImg.addEventListener('click', postNiceIssue, false);
+  StealthImg.addEventListener('click', postStealthIssue, false);
 
   // ボタンを配置する場所を用意
   var element = document.createElement('p');
   element.style.textAlign = 'right';
   // 配置
-  element.appendChild(LikeImg);
+  element.appendChild(StealthImg);
 
   // HTMLに入れ込む
   var issueElm = document.querySelector( '[id^="issue-"]' );
@@ -100,22 +99,22 @@ function addLikeButtonIssue() {
 }
 
 /**
-  * issue 自体のいいねボタンのイベント
+  * issue 自体のステルスポストボタンのイベント
   * @TODO これまだ使ってない
   */
-function postNiceIssue(){
-  // いいねボタンを一瞬黄色にする
+function postStealthIssue(){
+  // ステルスポストボタンを一瞬黄色にする
   var buttonImgElm = this;
   changeColor(buttonImgElm, bkColorClicked);
   postComment('This issue');
-  // いいねボタンを白色に戻す
+  // ステルスポストボタンを白色に戻す
   setTimeout( function(){changeColor(buttonImgElm, bkColor)}, 300);
 };
 
 /**
-  * コメントにいいねボタン追加
+  * コメントにステルスポストボタン追加
   */
-function addLikeButtonComments() {
+function addStealthButtonComments() {
   var commentElms = document.querySelectorAll( '[id^="issuecomment-"]' );
 
   for (var i = 0; i < commentElms.length; i++) {
@@ -124,47 +123,47 @@ function addLikeButtonComments() {
 
     element.dataset.issueCommentId = commentElms[i].id;
 
-    var LikeImg = createLikeButton();
-    element.addEventListener('click', postNice, false);
+    var StealthImg = createStealthButton();
+    element.addEventListener('click', postStealth, false);
 
-    element.appendChild(LikeImg);
+    element.appendChild(StealthImg);
     commentHeaderElm.appendChild(element);
   }
 }
 
 /**
-  * コメントのいいねボタンのイベント
+  * コメントのステルスポストボタンのイベント
   */
-function postNice(){
+function postStealth(){
   var issueCommentId = this.dataset.issueCommentId;
-  // いいねボタンを一瞬黄色にする
+  // ステルスポストボタンを一瞬黄色にする
   var buttonImgElm = this.querySelector('img');
   changeColor(buttonImgElm, bkColorClicked);
   postComment(issueCommentId);
-  // いいねボタンを白色に戻す
+  // ステルスポストボタンを白色に戻す
   setTimeout( function(){changeColor(buttonImgElm, bkColor)}, 300);
 };
 
 /**
-  * いいねボタンの色の変更
+  * ステルスポストボタンの色の変更
   */
 function changeColor(imgElm, color) {
   imgElm.style.backgroundColor = color;
 }
 
 /**
-  * いいねコメントの一覧を、いいね元のコメントid毎に取得
+  * ステルスポストコメントの一覧を、ステルスポスト元のコメントid毎に取得
   */
-function getAllLikeComments() {
+function getAllStealthComments() {
   var discussionBubbles = document.querySelectorAll('.discussion-bubble');
-  var LikeComments = {};
+  var StealthComments = {};
   for (var i = 0; i < discussionBubbles.length; i++) {
     var discussionBubble = discussionBubbles[i];
 
-    // いいねボタンっぽいコメントかどうかチェック
+    // ステルスポストっぽいコメントかどうかチェック
     var commentBodyText = discussionBubble.querySelector('.comment-body').textContent;
     if (commentBodyText.search(defaultMessage) != -1) {
-      // いいねボタンっぽいコメントだった場合、どのコメントに対するいいねなのかを取得
+      // ステルスポストっぽいコメントだった場合、どのコメントに対するステルスポストなのかを取得
       var reCom  = /issuecomment-[0-9]+/;
       var matches = commentBodyText.match(reCom);
 
@@ -173,19 +172,19 @@ function getAllLikeComments() {
       } else {
         var originalCommentId = 'issue';
       }
-      if (!LikeComments[originalCommentId]) {
-        LikeComments[originalCommentId] = [];
+      if (!StealthComments[originalCommentId]) {
+        StealthComments[originalCommentId] = [];
       }
-      LikeComments[originalCommentId].push(discussionBubble);
+      StealthComments[originalCommentId].push(discussionBubble);
     }
   }
-  return LikeComments;
+  return StealthComments;
 }
 
 /**
-  * いいねコメントを非表示にする
+  * ステルスポストコメントを非表示にする
   */
-function hideAllLikeComments(discussionBubblesAllArray) {
+function hideAllStealthComments(discussionBubblesAllArray) {
   for (var parentId in discussionBubblesAllArray){
     var discussionBubblesArray = discussionBubblesAllArray[parentId];
     for (var i = 0; i < discussionBubblesArray.length; i++) {
@@ -195,18 +194,18 @@ function hideAllLikeComments(discussionBubblesAllArray) {
 }
 
 /**
-  * いいねコメントを削除する
+  * ステルスポストコメントを削除する
   * @TODO 実装
   */
-function deleteLikeComment() {
+function deleteStealthComment() {
   var commentId = this.getAttribute('for');
 }
 
 
 /**
-  * いいねした人のアイコンを小さく表示する
+  * ステルスポストした人のアイコンを小さく表示する
   */
-function addLikeIcon(discussionBubblesAllArray) {
+function addStealthIcon(discussionBubblesAllArray) {
 
   for (var parentId in discussionBubblesAllArray){
     if (parentId === 'issue') {
@@ -239,7 +238,7 @@ function addLikeIcon(discussionBubblesAllArray) {
       var avatarImg      = document.createElement('img');
       avatarImg.width  = avatarSettingImgWidth;
       avatarImg.height = avatarSettingImgHeight;
-//      avatarImg.onclick = deleteLikeComment; @TODO アイコンクリックでイイネコメント削除
+//      avatarImg.onclick = deleteStealthComment; @TODO アイコンクリックでイイネコメント削除
       avatarImg.src      = avatarImgElm.getAttribute('src');
       avatarImg.setAttribute('for', commentId);
 
@@ -260,7 +259,7 @@ function addLikeIcon(discussionBubblesAllArray) {
 function postComment(target) {
   // フォームにコメントを挿入
   var commentForm = document.querySelector( '[id^="comment_body_"]' );
-  commentForm.value = '<p class="LikeComment"> ' + target + ' ' + customComment + ' ' + '<br />' + defaultMessage + repoURL + '</p>';
+  commentForm.value = '<p class="StealthComment"> ' + target + ' ' + customComment + ' ' + '<br />' + defaultMessage + repoURL + '</p>';
 
   var submitButton = document.querySelector('.form-actions:last-child button[type="submit"]:last-child');
   var mouseEvents = document.createEvent("MouseEvents");
@@ -270,9 +269,9 @@ function postComment(target) {
   // ちょっと待たないと書き込み終わってなくてhideできないので苦肉の対応
   // @TODO もうちょっとかっこ良くしたい。。。。
   setTimeout( function(){
-    var allLikeComments = getAllLikeComments();
-    addLikeIcon(allLikeComments);
-    hideAllLikeComments(allLikeComments);
+    var allStealthComments = getAllStealthComments();
+    addStealthIcon(allStealthComments);
+    hideAllStealthComments(allStealthComments);
   }, 800);
 }
 
