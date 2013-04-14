@@ -16,7 +16,7 @@ var customComment = 'Stealth :+1:';
 var repoURL = 'https://github.com/nezumi650/StealthPosting';
 
 // ボタン画像(背景透過)
-var imgPath = 'https://github.com/nezumi650/StealthPosting/blob/master/iine.png';
+var imgPath = 'https://github.com/nezumi650/StealthPosting/blob/master/iine.png?raw=true';
 
 // ボタン画像の縦横
 var imgWidth  = 50;
