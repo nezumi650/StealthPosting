@@ -104,7 +104,8 @@ function addStealthButtonIssue() {
   */
 function postStealthIssue(){
   // ステルスポストボタンを一瞬黄色にする
-  var buttonImgElm = this;
+  var buttonImgElm = event.currentTarget;
+  console.log(buttonImgElm);
   changeColor(buttonImgElm, bkColorClicked);
   postComment('This issue');
   // ステルスポストボタンを白色に戻す
@@ -135,9 +136,10 @@ function addStealthButtonComments() {
   * コメントのステルスポストボタンのイベント
   */
 function postStealth(){
-  var issueCommentId = this.dataset.issueCommentId;
+  var targetButton   = event.currentTarget;
+  var issueCommentId = targetButton.dataset.issueCommentId;
   // ステルスポストボタンを一瞬黄色にする
-  var buttonImgElm = this.querySelector('img');
+  var buttonImgElm = targetButton.querySelector('img');
   changeColor(buttonImgElm, bkColorClicked);
   postComment(issueCommentId);
   // ステルスポストボタンを白色に戻す
@@ -198,7 +200,8 @@ function hideAllStealthComments(discussionBubblesAllArray) {
   * @TODO 実装
   */
 function deleteStealthComment() {
-  var commentId = this.getAttribute('for');
+  var target    = event.currentTarget;
+  var commentId = target.getAttribute('for');
 }
 
 
