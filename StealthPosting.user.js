@@ -105,7 +105,6 @@ function addStealthButtonIssue() {
 function postStealthIssue(){
   // ステルスポストボタンを一瞬黄色にする
   var buttonImgElm = event.currentTarget;
-  console.log(buttonImgElm);
   changeColor(buttonImgElm, bkColorClicked);
   postComment('This issue');
   // ステルスポストボタンを白色に戻す
@@ -233,7 +232,6 @@ function addStealthIcon(discussionBubblesAllArray) {
     }
 
     var discussionBubblesArray = discussionBubblesAllArray[parentId];
-    console.log(discussionBubblesArray);
     for (var commentCnt = 0; commentCnt < discussionBubblesArray.length; commentCnt++) {
       var commentId = discussionBubblesArray[commentCnt].querySelector('[id^="issuecomment-"]').getAttribute('id');
       var avatarImgElm = discussionBubblesArray[commentCnt].querySelector('.discussion-bubble-avatar');
