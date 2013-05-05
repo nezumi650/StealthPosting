@@ -8,21 +8,11 @@
  * 【!!!】この設定値は変更しないでください。汎用性が著しく失われます。
  */
 var defaultMessage = 'To display this comment more stylishly, see: ';
-
-// カスタムコメント
-var customComment = 'Stealth :+1:';
-
-// リポジトリURL
-var repoURL = 'https://github.com/nezumi650/StealthPosting';
-
-// ボタン画像(背景透過)
-var imgPath = 'https://github.com/nezumi650/StealthPosting/blob/master/iine.png?raw=true';
-
-// ボタン画像の縦横
-var imgWidth  = 50;
-var imgHeight = 25;
-
-// ボタン画像の背景色
+var customComment  = 'Stealth :+1:';
+var repoURL        = 'https://github.com/nezumi650/StealthPosting';
+var imgPath        = 'https://github.com/nezumi650/StealthPosting/blob/master/iine.png?raw=true';
+var imgWidth       = 50;
+var imgHeight      = 25;
 var bkColor        = 'white';
 var bkColorClicked = 'yellow';
 
@@ -31,11 +21,9 @@ var bkColorClicked = 'yellow';
   *** ミニアバター画像設定
   ********************************************/
 
-// ミニアバター画像の縦横
 var avatarSettingImgWidth  = 25;
 var avatarSettingImgHeight = 25;
 
-// ミニアバター画像表示部の文言
 var avatarSettingLabel = '<span style="font-size: 1px; color: #cccccc;">Got ' + customComment + ' from :</span> '
 
 
@@ -66,7 +54,6 @@ hideAllStealthComments(allStealthComments);
   * ステルスポストボタン自体を作成
   */
 function createStealthButton() {
-  // ボタンを用意
   var StealthImg    = document.createElement('img');
   StealthImg.width  = imgWidth;
   StealthImg.height = imgHeight;
@@ -157,6 +144,8 @@ function changeColor(imgElm, color) {
   */
 function getAllStealthComments() {
   var discussionBubbles = document.querySelectorAll('.discussion-bubble');
+console.log(discussionBubbles);
+
   var StealthComments = {};
   for (var i = 0; i < discussionBubbles.length; i++) {
     var discussionBubble = discussionBubbles[i];
