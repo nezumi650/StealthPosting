@@ -10,7 +10,6 @@
 var defaultMessage = 'StealthPosted.';
 
 var customComment  = '';
-var repoURL        = 'https://github.com/nezumi650/StealthPosting';
 var imgPath        = 'https://github.com/nezumi650/StealthPosting/blob/master/iine.png?raw=true';
 var imgWidth       = 50;
 var imgHeight      = 25;
@@ -123,7 +122,7 @@ function addStealthButtonComments() {
   * コメントのステルスポストボタンのイベント
   */
 function postStealth(){
-  var targetButton   = event.currentTarget;
+  var targetButton   = this;
   var issueCommentId = targetButton.dataset.issueCommentId;
   // ステルスポストボタンを一瞬黄色にする
   var buttonImgElm = targetButton.querySelector('img');
@@ -263,12 +262,3 @@ function postComment(target) {
     hideAllStealthComments(allStealthComments);
   }, 800);
 }
-
-
-
-
-
-
-
-
-
