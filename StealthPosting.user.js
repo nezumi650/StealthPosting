@@ -149,21 +149,24 @@ function getAllStealthComments() {
     var discussionBubble = discussionBubbles[i];
 
     // ステルスポストっぽいコメントかどうかチェック
-    var commentBodyText = discussionBubble.querySelector('.comment-body').textContent;
-    if (commentBodyText.search(defaultMessage) != -1) {
-      // ステルスポストっぽいコメントだった場合、どのコメントに対するステルスポストなのかを取得
-      var reCom  = /issuecomment-[0-9]+/;
-      var matches = commentBodyText.match(reCom);
+    var commentBody     = discussionBubble.querySelector('.comment-body');
+    if (commentBody) {
+      var commentBodyText = commentBody.textContent;
+      if (commentBodyText.search(defaultMessage) != -1) {
+        // ステルスポストっぽいコメントだった場合、どのコメントに対するステルスポストなのかを取得
+        var reCom  = /issuecomment-[0-9]+/;
+        var matches = commentBodyText.match(reCom);
 
-      if (matches) {
-        var originalCommentId = matches[0];
-      } else {
-        var originalCommentId = 'issue';
+        if (matches) {
+          var originalCommentId = matches[0];
+        } else {
+          var originalCommentId = 'issue';
+        }
+        if (!StealthComments[originalCommentId]) {
+          StealthComments[originalCommentId] = [];
+        }
+        StealthComments[originalCommentId].push(discussionBubble);
       }
-      if (!StealthComments[originalCommentId]) {
-        StealthComments[originalCommentId] = [];
-      }
-      StealthComments[originalCommentId].push(discussionBubble);
     }
   }
   return StealthComments;
