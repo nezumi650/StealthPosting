@@ -7,8 +7,9 @@
 /**
  * 【!!!】この設定値は変更しないでください。汎用性が著しく失われます。
  */
-var defaultMessage = 'To display this comment more stylishly, see: ';
-var customComment  = 'Stealth :+1:';
+var defaultMessage = 'StealthPosted.';
+
+var customComment  = '';
 var repoURL        = 'https://github.com/nezumi650/StealthPosting';
 var imgPath        = 'https://github.com/nezumi650/StealthPosting/blob/master/iine.png?raw=true';
 var imgWidth       = 50;
@@ -24,7 +25,7 @@ var bkColorClicked = 'yellow';
 var avatarSettingImgWidth  = 25;
 var avatarSettingImgHeight = 25;
 
-var avatarSettingLabel = '<span style="font-size: 1px; color: #cccccc;">Got ' + customComment + ' from :</span> '
+var avatarSettingLabel = '<span style="font-size: 1px; color: #cccccc;">Got +1 from :</span> '
 
 
 
@@ -247,7 +248,7 @@ function addStealthIcon(discussionBubblesAllArray) {
 function postComment(target) {
   // フォームにコメントを挿入
   var commentForm = document.querySelector( '[id^="comment_body_"]' );
-  commentForm.value = '<p class="StealthComment"> ' + target + ' ' + customComment + ' ' + '<br />' + defaultMessage + repoURL + '</p>';
+  commentForm.value = '[' + target + '](#' + target + ' ) ' + defaultMessage + customComment + ':+1:';
 
   var submitButton = document.querySelector('.form-actions:last-child button[type="submit"]:last-child');
   var mouseEvents = document.createEvent("MouseEvents");
