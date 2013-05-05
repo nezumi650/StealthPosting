@@ -144,8 +144,6 @@ function changeColor(imgElm, color) {
   */
 function getAllStealthComments() {
   var discussionBubbles = document.querySelectorAll('.discussion-bubble');
-console.log(discussionBubbles);
-
   var StealthComments = {};
   for (var i = 0; i < discussionBubbles.length; i++) {
     var discussionBubble = discussionBubbles[i];
