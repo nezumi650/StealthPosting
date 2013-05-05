@@ -35,7 +35,11 @@ var avatarSettingLabel = '<span style="font-size: 1px; color: #cccccc;">Got +1 f
 // addStealthButtonIssue(); @TODO あとで
 
 // コメントにイイネボタン追加
-addStealthButtonComments();
+var reCom  = /\/pull\//;
+var matches = location.href.match(reCom);
+if (!matches) {
+  addStealthButtonComments();
+}
 
 // ミニアバターの追加、イイネコメントのhide
 var allStealthComments = getAllStealthComments();
